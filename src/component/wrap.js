@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import DoneList from './doneList';
 import UndoList from './undoList';
-import CardList from '../todo.json'
-
-const thingUndo = CardList.orders.filter(item =>( item.status.code === 1 || item.status.code === 2));
-const thingDone = CardList.orders.filter(item =>( item.status.code === 3 || item.status.code === 4));
+import CardList from '../todo.json';
+import store from '../redux/store';
 
 const Wrap = styled.div`
     border:1px solid #ccc;
@@ -17,14 +15,22 @@ const Wrap = styled.div`
         align-item:center;
     }
 `
-
+function getAPI(info){
+    const action = {
+        type:'SET_CURRENT_TODOLIST',
+        payload:info
+    }
+    store.dispatch(action);
+}
 class wrap extends Component {
-    
+    componentDidMount() {
+        getAPI(CardList);
+    }
     render() {
         return (
             <Wrap>
-                <UndoList job={thingUndo}/>
-                <DoneList job={thingDone}/>
+                <UndoList/>
+                <DoneList/>
             </Wrap>
         );
     }

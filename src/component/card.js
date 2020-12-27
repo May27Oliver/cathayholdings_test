@@ -17,8 +17,15 @@ const LogoBox = styled.div`
 `
 
 const ContentBox = styled.div`
-    padding:20px;
+    padding:40px 10px;
     flex:1;
+
+    @media (min-width: 350px) {
+        padding:30px 10px;
+    }
+    @media (min-width: 500px) {
+        padding:20px;
+    }
 `
 const ContentHeader = styled.div`
     display:flex;

@@ -15,22 +15,32 @@ const UndoTitle = styled.div`
     box-sizing:border-box;
     width:100%;
     line-height:50px;
-    padding:0 50px;
+    padding:0 25px;
     background:#F8F8F8;
     position:relative;
     &:before{
         content:'';
         position:absolute;
         top: 16px;
-        left: 35px;
+        left: 10px;
         width:5px;
         height:20px;
         background:#009F49;
     }
+    @media (min-width: 500px) {
+        padding:0 50px;
+        &:before{
+            left: 35px;
+        }
+    }
 `
 
 const undoList =({todo})=>{
-    todo = todo.todoList.orders.filter(item =>( item.status.code === 1 || item.status.code === 2))
+    if(todo.todoList){
+       todo = todo.todoList.orders.filter(item =>( item.status.code === 1 || item.status.code === 2)) 
+    }else{
+        todo =[];
+    }
     return (
         <Undo>
             <UndoTitle>進行中</UndoTitle>

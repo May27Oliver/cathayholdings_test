@@ -1,7 +1,5 @@
-import CardList from '../../todo.json'
-
 const INITIAL_STATE = {
-    todoList:CardList
+    todoList:null
 }
 
 const todoReducer = (state = INITIAL_STATE, action)=> {
