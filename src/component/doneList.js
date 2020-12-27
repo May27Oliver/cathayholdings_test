@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Card from './card'
+import { connect } from 'react-redux';
 
 const Done = styled.div`
     width:100%;
@@ -28,19 +29,18 @@ const DoneTitle = styled.div`
     }
 `
 
-class doneList extends Component {
-    render() {
-        const { job } = this.props;
-        const finished = true;
-        return (
-            <Done>
-                <DoneTitle>已完成</DoneTitle>
-                <DonListBox>
-                    {job.map(item=>(<Card info={item} finish={finished}/>))}
-                </DonListBox>
-            </Done>
-        );
-    }
+const doneList = ({todo})=>{
+    todo = todo.todoList.orders.filter(item =>( item.status.code === 3 || item.status.code === 4))
+    return (
+        <Done>
+            <DoneTitle>已完成</DoneTitle>
+            <DonListBox>
+                {todo.map(item=>(<Card info={item} finish={true} key={item.date}/>))}
+            </DonListBox>
+        </Done>
+    )
 }
 
-export default doneList;
+const mapStateToProps = state=>({todo: state.todoList});
+
+export default connect(mapStateToProps)(doneList);

@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import Card from './card'
+import Card from './card';
+import { connect } from 'react-redux';
 
 const Undo = styled.div`
     width:100%;
@@ -28,19 +29,18 @@ const UndoTitle = styled.div`
     }
 `
 
-class undoList extends Component {
-    render() {
-        const {job} = this.props;
-        const finished = false;
-        return (
-            <Undo>
-                <UndoTitle>進行中</UndoTitle>
-                <UndoListBox>
-                    {job.map(item=>(<Card info={item} finish={finished}/>))}
-                </UndoListBox>
-            </Undo>
-        );
-    }
+const undoList =({todo})=>{
+    todo = todo.todoList.orders.filter(item =>( item.status.code === 1 || item.status.code === 2))
+    return (
+        <Undo>
+            <UndoTitle>進行中</UndoTitle>
+            <UndoListBox>
+                {todo.map(item=>(<Card info={item} finish={false} key={item.date}/>))}
+            </UndoListBox>
+        </Undo>
+    );
 }
 
-export default undoList;
+const mapStateToProps = state=>({todo: state.todoList});
+
+export default connect(mapStateToProps)(undoList);
