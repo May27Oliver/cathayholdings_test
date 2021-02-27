@@ -2,5 +2,4 @@ import {createStore} from 'redux';//我們需要將middleware加進store裡，mi
 import rootReducer from './root-reducer';
 
 const store = createStore(rootReducer);
-
 export default store;

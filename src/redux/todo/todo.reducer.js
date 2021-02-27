@@ -9,6 +9,11 @@ const todoReducer = (state = INITIAL_STATE, action)=> {
                 ...state,
                 todoList:action.payload
             }
+        case "ADD_CURRENT_TODOLIST":
+            return {
+                ...state,
+                todoList:action.payload
+            }
         default:
             return state;
     }

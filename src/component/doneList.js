@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 const Done = styled.div`
     width:100%;
-    postion:relative;
+    position:relative;
 `
 const DonListBox = styled.div`
     width:100%;
